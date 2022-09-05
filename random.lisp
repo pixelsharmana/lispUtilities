@@ -1,0 +1,15 @@
+(defun squirrel3 (position &optional (seed 0))
+  (flet ((logash (x shift) (logxor (ash x shift) x)))
+    (let ((prime1 3039394381)
+	  (prime2 1759714724)
+	  (prime3 458671337))
+      (logash (* (logash (+ (logash (+ (* position prime1) seed) -16) prime2) 16) prime3) -16))))
+
+(defun squirrel3-2d (x y &optional (seed 0))
+  (let ((prime 198491317))
+    (squirrel3 (+ x (* prime y)) seed)))
+
+(defun squirrel3-3d (x y z &optional (seed 0))
+  (let ((prime1 198491317)
+	(prime2 6542989))
+    (squirrel3 (+ x (* prime1 y) (* prime2 z)) seed)))
